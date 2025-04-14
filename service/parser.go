@@ -4,20 +4,26 @@ import (
 	"fmt"
 	"github.com/Weso1ek/go-gundam-hunter/context"
 	"github.com/Weso1ek/go-gundam-hunter/helpers"
+	"net/url"
 )
 
 func GetOffers(searchTerm string) []*context.GundamOffers {
 	var offers []*context.GundamOffers
 
 	for _, k := range context.SearchServices {
-		fmt.Println("Parsing: ", k.Domain)
+		searchUrl := k.SearchUrl + url.QueryEscape(searchTerm)
 
-		serviceHtml, err := helpers.GetHtml(k.SearchUrl + searchTerm)
+		fmt.Println("Parsing: ", k.Domain)
+		fmt.Println("Parsing: ", searchUrl)
+
+		serviceHtml, err := helpers.GetHtml(searchUrl)
 		if err != nil {
 			fmt.Println(err)
 		}
 
-		fmt.Println(serviceHtml)
+		domainOffers := helpers.ProcessHtml(serviceHtml, offers)
+
+		fmt.Println(domainOffers)
 	}
 
 	return offers
