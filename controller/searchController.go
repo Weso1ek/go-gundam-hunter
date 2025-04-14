@@ -2,7 +2,7 @@ package controller
 
 import (
 	"encoding/json"
-	"fmt"
+	"github.com/Weso1ek/go-gundam-hunter/service"
 	"net/http"
 )
 
@@ -15,15 +15,9 @@ func NewSearchController() *SearchController {
 func (s SearchController) Search(w http.ResponseWriter, r *http.Request) {
 	searchTerm := r.URL.Query().Get("searchTerm")
 
-	fmt.Println(searchTerm)
-	fmt.Println(searchTerm)
-	fmt.Println(searchTerm)
+	offers := service.GetOffers(searchTerm)
 
-	var status = map[string]string{
-		"status": "ok",
-	}
-
-	statusJson, err := json.Marshal(status)
+	statusJson, err := json.Marshal(offers)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

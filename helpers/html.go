@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func getHTML(rawURL string) (string, error) {
+func GetHtml(rawURL string) (string, error) {
 	res, err := http.Get(rawURL)
 	if err != nil {
 		return "", fmt.Errorf("got network error: %v", err)
@@ -22,7 +22,5 @@ func getHTML(rawURL string) (string, error) {
 		return "", fmt.Errorf("couldn't read response body: %v", err)
 	}
 
-	htmlBody := string(htmlBodyBytes)
-
-	return htmlBody, nil
+	return string(htmlBodyBytes), nil
 }
