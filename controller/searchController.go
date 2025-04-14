@@ -16,6 +16,8 @@ func (s SearchController) Search(w http.ResponseWriter, r *http.Request) {
 	searchTerm := r.URL.Query().Get("searchTerm")
 
 	fmt.Println(searchTerm)
+	fmt.Println(searchTerm)
+	fmt.Println(searchTerm)
 
 	var status = map[string]string{
 		"status": "ok",
