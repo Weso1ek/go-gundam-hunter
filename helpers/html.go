@@ -43,11 +43,19 @@ func ProcessHtml(htmlBody string, offers []*context.GundamOffers) []*context.Gun
 
 func ProcessOffers(n *html.Node, offers *[]*context.GundamOffers) {
 	if n.Type == html.ElementNode && n.Data == "article" {
-		fmt.Println("----")
-		fmt.Println(n)
-		fmt.Println("----")
+		processOffer(n, offers)
+		//fmt.Println("----")
+		//fmt.Println(n)
+		//fmt.Println("----")
 	}
 
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
+		ProcessOffers(c, offers)
+	}
+}
+
+func processOffer(n *html.Node, offers *[]*context.GundamOffers) {
+	fmt.Println(n.FirstChild)
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
 		ProcessOffers(c, offers)
 	}

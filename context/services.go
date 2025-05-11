@@ -1,13 +1,13 @@
 package context
 
 type GundamOffers struct {
-	Title    string
-	Price    float64
-	Link     string
-	Domain   string
-	Img      *string
-	Active   bool
-	Discount *float64
+	Title string
+	//Price    float64
+	//Link     string
+	//Domain   string
+	//Img      *string
+	//Active   bool
+	//Discount *float64
 }
 
 type SearchService struct {
