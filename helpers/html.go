@@ -55,8 +55,10 @@ func ProcessOffers(n *html.Node, offers *[]*context.GundamOffers) {
 }
 
 func processOffer(n *html.Node, offers *[]*context.GundamOffers) {
-	fmt.Println(n.FirstChild)
+	fmt.Println("====")
+	fmt.Println(n.FirstChild.Attr)
+	fmt.Println("====")
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
-		ProcessOffers(c, offers)
+
 	}
 }
