@@ -77,7 +77,15 @@ func processOffer(n *html.Node, offers *[]*context.GundamOffer) {
 				if d.Data == "div" {
 					for e := d.FirstChild; e != nil; e = e.NextSibling {
 						if e.Data == "h2" {
-
+							for g := e.FirstChild; g != nil; g = g.NextSibling {
+								if g.Data == "a" {
+									for h := g.FirstChild; h != nil; h = h.NextSibling {
+										if h.Type == html.TextNode {
+											gundamOffer.Title = h.Data
+										}
+									}
+								}
+							}
 						}
 					}
 				}
