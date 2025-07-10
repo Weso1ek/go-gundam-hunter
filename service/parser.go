@@ -7,8 +7,8 @@ import (
 	"net/url"
 )
 
-func GetOffers(searchTerm string) []*context.GundamOffers {
-	var offers []*context.GundamOffers
+func GetOffers(searchTerm string) []*context.GundamOffer {
+	var offers []*context.GundamOffer
 
 	for _, k := range context.SearchServices {
 		searchUrl := k.SearchUrl + url.QueryEscape(searchTerm)

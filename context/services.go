@@ -1,9 +1,9 @@
 package context
 
-type GundamOffers struct {
+type GundamOffer struct {
 	Title string
 	//Price    float64
-	//Link     string
+	Url string
 	//Domain   string
 	//Img      *string
 	//Active   bool

@@ -28,7 +28,7 @@ func GetHtml(rawURL string) (string, error) {
 	return string(htmlBodyBytes), nil
 }
 
-func ProcessHtml(htmlBody string, offers []*context.GundamOffers) []*context.GundamOffers {
+func ProcessHtml(htmlBody string, offers []*context.GundamOffer) []*context.GundamOffer {
 	reader := strings.NewReader(htmlBody)
 
 	parsed, err := html.Parse(reader)
@@ -41,12 +41,9 @@ func ProcessHtml(htmlBody string, offers []*context.GundamOffers) []*context.Gun
 	return offers
 }
 
-func ProcessOffers(n *html.Node, offers *[]*context.GundamOffers) {
+func ProcessOffers(n *html.Node, offers *[]*context.GundamOffer) {
 	if n.Type == html.ElementNode && n.Data == "article" {
 		processOffer(n, offers)
-		//fmt.Println("----")
-		//fmt.Println(n)
-		//fmt.Println("----")
 	}
 
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
@@ -54,11 +51,25 @@ func ProcessOffers(n *html.Node, offers *[]*context.GundamOffers) {
 	}
 }
 
-func processOffer(n *html.Node, offers *[]*context.GundamOffers) {
-	fmt.Println("====")
-	fmt.Println(n.FirstChild.Attr)
-	fmt.Println("====")
-	for c := n.FirstChild; c != nil; c = c.NextSibling {
+func processOffer(n *html.Node, offers *[]*context.GundamOffer) {
 
+	gundamOffer := &context.GundamOffer{}
+
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
+		if c.Data == "div" {
+			for d := c.FirstChild; d != nil; d = d.NextSibling {
+				if d.Data == "a" {
+					for _, a := range d.Attr {
+						if a.Key == "href" {
+							fmt.Println(a.Val)
+							gundamOffer.Url = a.Val
+						}
+					}
+				}
+
+			}
+		}
 	}
+
+	*offers = append(*offers, gundamOffer)
 }
