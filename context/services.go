@@ -5,7 +5,7 @@ type GundamOffer struct {
 	//Price    float64
 	Url string
 	//Domain   string
-	//Img      *string
+	Img string
 	//Active   bool
 	//Discount *float64
 }

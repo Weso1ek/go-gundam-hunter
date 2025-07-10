@@ -61,12 +61,26 @@ func processOffer(n *html.Node, offers *[]*context.GundamOffer) {
 				if d.Data == "a" {
 					for _, a := range d.Attr {
 						if a.Key == "href" {
-							fmt.Println(a.Val)
 							gundamOffer.Url = a.Val
+						}
+					}
+
+					for f := d.FirstChild; f != nil; f = f.NextSibling {
+						for _, fa := range f.Attr {
+							if fa.Key == "src" {
+								gundamOffer.Img = fa.Val
+							}
 						}
 					}
 				}
 
+				if d.Data == "div" {
+					for e := d.FirstChild; e != nil; e = e.NextSibling {
+						if e.Data == "h2" {
+
+						}
+					}
+				}
 			}
 		}
 	}
